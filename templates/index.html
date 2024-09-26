@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Smart Traffic Management System</title>
+</head>
+<body>
+    <h1>Smart Traffic Management System</h1>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Traffic_light_on_St._Paul%27s_Square%2C_Liverpool.jpg/800px-Traffic_light_on_St._Paul%27s_Square%2C_Liverpool.jpg" alt="Traffic Light" style="width:300px; border-radius:10px; margin-top: 20px;">
+    <div id="traffic-light">
+        <h2>Traffic Light Status</h2>
+        <div>
+            <p>Light ID: <strong>{{ light.id }}</strong></p>
+            <p>Current State: <strong>{{ light.state }}</strong></p>
+            <p>Timer: <strong>{{ light.timer }} seconds</strong></p>
+        </div>
+        <form action="/" method="post">
+            <label for="traffic_density">Traffic Density (0-100): </label>
+            <input type="number" id="traffic_density" name="traffic_density" min="0" max="100" required>
+            <br>
+            <button type="submit">Adjust Traffic Light</button>
+        </form>
+    </div>
+    <div class="footer">
+        &copy; 2024 Smart Traffic Management System
+    </div>
+</body>
+</html>
