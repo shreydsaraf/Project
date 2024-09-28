@@ -43,7 +43,7 @@ pipeline {
             steps {
                 // Run code quality analysis using SonarQube
                 withSonarQubeEnv('SonarQubeServer') { // Replace 'SonarQubeServer' with your actual SonarQube configuration name
-                    sh 'mvn sonar:sonar -Dsonar.projectKey=my_project_key -Dsonar.projectName="My Awesome Web Application" -Dsonar.host.url=http://localhost:9000'
+                    sh 'mvn sonar:sonar -Dsonar.projectKey=my_project_key -Dsonar.projectName="My Awesome Web Application" -Dsonar.host.url='http://192.168.1.2:9000'
                 }
             }
         }
