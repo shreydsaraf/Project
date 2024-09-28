@@ -34,7 +34,7 @@ pipeline {
         
         stage('Test') {
             steps {
-                // Run tests
+                // Run tests with JUnit
                 sh 'mvn test'
             }
         }
