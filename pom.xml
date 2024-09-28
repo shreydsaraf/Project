@@ -13,12 +13,21 @@
     </properties>
 
     <dependencies>
-        <!-- Example dependency for a web framework, replace with your actual dependencies -->
+        <!-- Spring Boot Web Starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>2.5.4</version>
         </dependency>
+
+        <!-- JUnit 5 Dependency for Testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.8.2</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- Add other dependencies here as needed -->
     </dependencies>
 
@@ -47,4 +56,5 @@
         </snapshotRepository>
     </distributionManagement>
 </project>
+
 
