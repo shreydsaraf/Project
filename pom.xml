@@ -29,5 +29,16 @@
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/shreydsaraf/Project</url>
+        </repository>
+        <snapshotRepository>
+            <id>github-snapshots</id>
+            <url>https://maven.pkg.github.com/shreydsaraf/Project</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
 
