@@ -1,52 +1,46 @@
 pipeline {
     agent any
     stages {
+        stage('Checkout') {
+            steps {
+                // Checkout code from SCM
+                git 'https://github.com/shreydsaraf/Project.git'
+            }
+        }
         stage('Build') {
             steps {
-                script {
-                    // Clean and build the project, creating a JAR file
-                    sh 'mvn clean package'
-                }
+                // Use Maven to build the project
+                sh 'mvn clean package'
             }
         }
         stage('Archive Artifacts') {
             steps {
-                // Archive the built JAR file for later use
-                archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
+                // Archive the built JAR file
+                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
         }
         stage('Test') {
             steps {
-                script {
-                    // Run your tests here
-                    sh 'mvn test'
-                }
+                // Run your tests here
+                sh 'mvn test'
             }
         }
         stage('Code Quality Analysis') {
             steps {
-                script {
-                    // Run SonarQube analysis (assuming you have configured SonarQube)
-                    sh 'sonar-scanner'
-                }
+                // Run SonarQube analysis or any other tool
+                sh 'mvn sonar:sonar'
             }
         }
         stage('Deploy') {
             steps {
-                script {
-                    // Deploy your application (assuming a server is available)
-                    // This is a placeholder for your actual deployment command
-                    echo 'Deploying the application...'
-                    // Example: scp target/yourapp.jar user@server:/path/to/deploy
-                }
+                // Deploy your application if needed
+                echo 'Deploying application...'
             }
         }
         stage('Release') {
             steps {
-                script {
-                    // Handle the release process here
-                    echo 'Application released successfully!'
-                }
+                // Handle the release process here
+                echo 'Application released!'
             }
         }
     }
