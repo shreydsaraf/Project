@@ -5,6 +5,11 @@ pipeline {
         maven 'Maven 3.8.1' // Name defined in Global Tool Configuration
     }
     
+    environment {
+        // SonarQube environment variable, replace 'SonarQubeServer' with the actual name of your SonarQube server configured in Jenkins
+        SONARQUBE_ENV = 'SonarQubeServer'
+    }
+    
     stages {
         stage('Checkout') {
             steps {
@@ -36,9 +41,10 @@ pipeline {
         
         stage('Code Quality Analysis') {
             steps {
-                // Run code quality analysis (using tools like SonarQube, if set up)
-                // Example using SonarQube
-                sh 'mvn sonar:sonar'
+                // Run code quality analysis using SonarQube
+                withSonarQubeEnv('SonarQubeServer') { // Replace 'SonarQubeServer' with your actual SonarQube configuration name
+                    sh 'mvn sonar:sonar -Dsonar.projectKey=your_project_key -Dsonar.projectName="Your Project Name" -Dsonar.host.url=http://localhost:9000'
+                }
             }
         }
         
@@ -52,8 +58,7 @@ pipeline {
         
         stage('Release') {
             steps {
-                // Release the application
-                // Example for releasing, e.g., pushing to a repository
+                // Release the application, e.g., pushing to a repository
                 sh 'mvn release:prepare release:perform'
             }
         }
