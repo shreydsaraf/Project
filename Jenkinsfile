@@ -1,12 +1,14 @@
 pipeline {
-    agent {
-        docker {
-            image 'docker:latest' // Use the Docker image
-            args '-v /var/run/docker.sock:/var/run/docker.sock' // Mount Docker socket
-        }
-    }
+    agent any // Use 'any' if you're unsure about the environment
+
     stages {
         stage('Build') {
+            agent {
+                docker {
+                    image 'docker:latest' // Use the Docker image
+                    args '-v /var/run/docker.sock:/var/run/docker.sock' // Mount Docker socket
+                }
+            }
             steps {
                 script {
                     // Build your Docker image
