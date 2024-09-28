@@ -6,8 +6,7 @@ pipeline {
     }
     
     environment {
-        // SonarQube environment variable, replace 'SonarQubeServer' with the actual name of your SonarQube server configured in Jenkins
-        SONARQUBE_ENV = 'SonarQubeServer'
+        SONARQUBE_ENV = 'SonarQubeServer' // Your SonarQube configuration name
     }
     
     stages {
@@ -42,9 +41,8 @@ pipeline {
         stage('Code Quality Analysis') {
             steps {
                 // Run code quality analysis using SonarQube
-                withSonarQubeEnv('SonarQubeServer') { // Replace 'SonarQubeServer' with your actual SonarQube configuration name
+                withSonarQubeEnv('SonarQubeServer') {
                     sh 'mvn sonar:sonar -Dsonar.projectKey=my_project_key -Dsonar.projectName="My Awesome Web Application" -Dsonar.host.url=http://192.168.1.2:9000'
-
                 }
             }
         }
@@ -52,29 +50,33 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Deploy the application (e.g., to a server or a container)
-                // You can customize this part based on your deployment strategy
+                // Customize based on your deployment strategy
                 sh 'mvn deploy'
+            }
+        }
+        
+        stage('Monitoring and Alerting') {
+            steps {
+                echo 'Monitoring and Alerting stage executed (placeholder).'
             }
         }
         
         stage('Release') {
             steps {
-                // Release the application, e.g., pushing to a repository
-                sh 'mvn release:prepare release:perform'
+                echo 'Release stage executed (placeholder).'
             }
         }
     }
     
     post {
         success {
-            // Actions to perform on success
             echo 'Pipeline completed successfully!'
         }
         failure {
-            // Actions to perform on failure
             echo 'Pipeline failed!'
         }
     }
 }
+
 
 
